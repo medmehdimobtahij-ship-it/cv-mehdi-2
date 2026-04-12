@@ -183,6 +183,14 @@
       width: 100%;
       display: block;
       transform: translateX(35px);
+      filter: grayscale(100%) drop-shadow(0 0 25px rgba(201, 168, 108, 0.15))
+             drop-shadow(0 0 60px rgba(201, 168, 108, 0.08));
+      transition: filter 0.6s ease;
+    }
+
+    .hero-photo:hover .hero-photo-img {
+      filter: grayscale(0%) drop-shadow(0 0 30px rgba(201, 168, 108, 0.3))
+             drop-shadow(0 0 80px rgba(201, 168, 108, 0.12));
     }
 
     .hero-photo-line {
@@ -206,6 +214,79 @@
       border-radius: 99px;
     }
 
+    /* ── ENTRANCE ANIMATIONS ── */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes photoReveal {
+      from {
+        opacity: 0;
+        transform: translateX(35px) translateY(40px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(35px) translateY(0) scale(1);
+      }
+    }
+
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes badgePop {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .hero-tag,
+    .hero h1,
+    .hero-desc,
+    .hero-actions,
+    .hero-contact {
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+    }
+
+    .hero-tag         { animation-delay: 0.15s; }
+    .hero h1          { animation-delay: 0.35s; }
+    .hero-desc        { animation-delay: 0.55s; }
+    .hero-actions     { animation-delay: 0.75s; }
+    .hero-contact     { animation-delay: 0.9s; }
+
+    .hero-photo-img {
+      opacity: 0;
+      animation: photoReveal 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .hero-photo-line {
+      transform-origin: center;
+      transform: scaleX(0);
+      animation: lineGrow 0.6s ease forwards;
+      animation-delay: 1.3s;
+    }
+
+    .hero-photo-badge {
+      opacity: 0;
+      animation: badgePop 0.5s ease forwards;
+      animation-delay: 1.6s;
+    }
+
     /* ── FOOTER ── */
     .footer {
       border-top: 1px solid var(--border);
@@ -223,28 +304,45 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 780px) {
-      .hero { padding: 4rem 1.5rem 2rem; }
+      .hero { padding: 3rem 1.5rem 2rem; min-height: auto; }
       .hero-inner {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 1.5rem;
         text-align: center;
       }
       .hero-tag { justify-content: center; }
       .hero-desc { margin-left: auto; margin-right: auto; }
-      .hero-actions { justify-content: center; }
+      .hero-actions { justify-content: center; flex-wrap: wrap; }
       .hero-contact { justify-content: center; }
       .hero-photo {
-        max-width: 240px;
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 200px;
+        max-width: 200px;
         margin: 0 auto;
         order: -1;
+      }
+      .hero-photo-img {
+        transform: none;
+        filter: grayscale(100%) drop-shadow(0 0 15px rgba(201, 168, 108, 0.15));
+        animation: fadeSlideUp 0.8s ease forwards;
+        animation-delay: 0.15s;
+      }
+      .hero-photo:hover .hero-photo-img {
+        transform: none;
       }
     }
 
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2.2rem; }
-      .hero-actions { flex-direction: column; align-items: stretch; }
-      .btn-main, .btn-outline { justify-content: center; }
-      .hero-contact { flex-direction: column; gap: 0.6rem; }
+      .hero { padding: 2rem 1rem 1.5rem; }
+      .hero h1 { font-size: 2rem; margin-bottom: 1.2rem; }
+      .hero-desc { font-size: 0.82rem; line-height: 1.7; margin-bottom: 1.8rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 0.7rem; }
+      .btn-main, .btn-outline { justify-content: center; padding: 0.75rem 1.5rem; }
+      .hero-contact { flex-direction: column; gap: 0.6rem; margin-top: 1.8rem; padding-top: 1.5rem; }
+      .hero-photo { width: 160px; max-width: 160px; }
+      .hero-photo-badge { font-size: 0.52rem; padding: 0.4rem 1rem; }
     }
   </style>
 </head>
