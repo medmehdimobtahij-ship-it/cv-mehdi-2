@@ -199,11 +199,13 @@
       height: 1px;
       background: var(--accent);
       margin: 0 auto;
+      transform: translateX(35px);
     }
 
     .hero-photo-badge {
       display: inline-block;
       margin-top: 0.8rem;
+      transform: translateX(35px);
       background: var(--accent);
       color: var(--bg);
       font-size: 0.58rem;
@@ -238,18 +240,18 @@
     }
 
     @keyframes lineGrow {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
+      from { transform: translateX(35px) scaleX(0); }
+      to { transform: translateX(35px) scaleX(1); }
     }
 
     @keyframes badgePop {
       from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: translateX(35px) scale(0.8);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateX(35px) scale(1);
       }
     }
 
@@ -276,7 +278,7 @@
 
     .hero-photo-line {
       transform-origin: center;
-      transform: scaleX(0);
+      transform: translateX(35px) scaleX(0);
       animation: lineGrow 0.6s ease forwards;
       animation-delay: 1.3s;
     }
@@ -331,6 +333,11 @@
       }
       .hero-photo:hover .hero-photo-img {
         transform: none;
+      }
+      .hero-photo-line,
+      .hero-photo-badge {
+        transform: none !important;
+        animation: fadeSlideUp 0.6s ease forwards !important;
       }
     }
 
