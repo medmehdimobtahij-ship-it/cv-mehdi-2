@@ -421,6 +421,8 @@
   document.querySelectorAll('.hero-photo-badge[data-copy]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const value = btn.dataset.copy;
+      const label = value.includes('@') ? 'copie_email' : 'copie_telephone';
+      gtag('event', label, { event_category: 'Contact', event_label: value });
       try { await navigator.clipboard.writeText(value); }
       catch { const t = document.createElement('textarea'); t.value = value; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
       const original = btn.textContent;
@@ -428,6 +430,10 @@
       btn.classList.add('is-copied');
       setTimeout(() => { btn.textContent = original; btn.classList.remove('is-copied'); }, 1400);
     });
+  });
+
+  document.querySelector('.btn-outline').addEventListener('click', () => {
+    gtag('event', 'clic_me_contacter', { event_category: 'Contact' });
   });
 </script>
 </body>
